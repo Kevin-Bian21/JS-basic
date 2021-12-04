@@ -8,13 +8,14 @@ const Rate = 0.3;
 String
 Number
 Boolean
+Symbol
 undefined
 null
 
 //引用类型
 Object
-Array
 Function
+Array
 
 
 let person = {
@@ -87,7 +88,7 @@ for (let attr in person)
 for (let index in colors)
     console.log(colors[index]);
 
-//for...of:for-of中迭代变量直接表示一个元素，主要用来遍历数组
+//for...of:for-of中迭代变量直接表示一个元素，主要用在可枚举的类型，例如数组和map
 for (let color of colors)
     console.log(color);
 
@@ -96,3 +97,96 @@ function getMaxValue(a, b){
     return a > b ? a : b;
 }
 console.log(getMaxValue(0, 1));
+
+function fizzBuzz(input) {
+    if (typeof input !== "number")
+        return NaN;
+    if ( (input % 3 === 0) && (input % 5 === 0) )
+        return 'FizzBuzz';
+    else if (input % 3 === 0)
+        return 'Fizz';
+    else if (input % 5 === 0)
+        return 'Buzz';
+    else 
+        return input;
+}
+
+console.log(fizzBuzz(5));
+
+function checkSpeed(speed) {
+    const speedLimit = 70;
+    const kmPerPoint = 5;
+    if(speed < speedLimit + kmPerPoint)
+        return 'OK';
+    
+    let points = Math.floor((speed - speedLimit) / kmPerPoint);
+    return points >= 12 ? 'License suspended' : points;
+}
+console.log(checkSpeed(74));
+
+//统计类真值或者类假值
+const array = [0, null, undefined, '', 2, 3];
+function countTruthy(array) {
+    let count = 0;
+    for (let value of array) {
+        if (value)
+            count ++;
+    }
+    return count;
+}
+console.log(countTruthy(array));
+
+
+const movie= {
+    title: 'God',
+    releaseYear: 2020,
+    rating: 8.9
+}
+function showProperties(obj) {
+    for (let key in obj) {
+        console.log(key, obj[key], typeof obj[key]);
+    }
+}
+showProperties(movie);
+
+//分数等级
+const marks = [80, 80, 50];
+function calculateGrade(marks) {
+    let avg = 0;
+    let sum = 0;
+    for (let score of marks)
+        sum += score;
+    avg = sum / marks.length;
+    
+    return (avg >= 90) ? 'A' : (avg >= 80) ? 'B' : (avg >= 70) ? 'C' : (avg >= 60) ? 'D' : 'E'; 
+}
+console.log(calculateGrade(marks));
+
+
+//打印星星
+function showStarts(rows) {
+    for (let i = 0; i < rows; i++) {
+        let pattern = '';
+        for(let j = 0; j <= i; j++)
+            pattern += '*';
+        console.log(pattern);
+    }
+}
+showStarts(5);
+
+//显示质数
+function showPrimes(limit) {
+    for (let num = 2; num <= limit; num ++){
+        if (isPrime(num))
+            console.log(num);
+    }
+}
+function isPrime(number) {
+    for (let factor = 2; factor < number; factor ++) {
+        if (number % factor === 0)
+            return false;
+    }
+    return true;
+}
+
+showPrimes(20);
